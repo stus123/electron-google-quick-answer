@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <title>TRIVIADOR CHEAT > settings</title>
+  <style>
+  body {
+    background:  #131313;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+    font-weight: 700;
+    line-height: 40px;
+    font-size: 30px;
+    /*<!-- padding: 48px; --> Montserrat, sans-serif; */
+   }
+
+   h1 {
+    font-size: 48px;
+    font-family: Montserrat, sans-serif;
+    letter-spacing: 2px;
+    text-align: center;
+   }
+
+   p {
+    font-size: 32px;
+    text-align: center;
+   }
+   input {
+   border: 1px solid #cccccc; 
+   border-radius: 3px; 
+   -webkit-border-radius: 3px; 
+  
+  
+   background: #ffffff !important; 
+   outline: none; 
+   height: 24px; 
+   width: 600px; 
+   color: #cccccc; 
+   font-size: 18px;
+   font-family: Tahoma; 
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: #131313; 
+    color: white; 
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.button1:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 2px solid rgb(0, 0, 0);
+}
+#wrapper {
+    text-align: center;
+}
+*,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    .toast {
+      max-width: 350px;
+      max-height: 80px;
+      overflow: hidden;
+      font-size: 0.875rem;
+      background-color: rgba(255, 255, 255, 0.5);
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.25rem;
+      box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      display: none;
+      position: relative;
+      padding: 0.75rem 2rem 0.75rem 0.75rem;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+
+    .toast:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+
+    .toast_show {
+      display: block;
+    }
+
+    .toast__close {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      padding: 0;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      float: right;
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: 0.6;
+      margin: 0;
+      font-family: inherit;
+      border-radius: 0;
+    }
+
+    input:not([type="checkbox"]) {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: .5rem;
+    }
+</style>
+</head>
+<h1>CHEAT SETTINGS</h1>
+<body onload='setVal()'>
+    <br>google api key:<p style="margin-left: 24px;"></p><input id="google_key"><br>
+    <br>google cx:<p style="margin-left: 24px;"></p><input id="google_cx"><br>
+    <br>ocrspace api key:<p style="margin-left: 24px;"></p><input id="ocrspace_key"><br>
+    <br>image file patch:<p style="margin-left: 24px;"></p><input id="path"><br>
+    <script>
+     
+       
+      function setVal() {
+        const fs = require('fs')
+        const dir = fs.readdirSync('C:/')
+        if(dir.includes('triviador') == false) {
+        fs.mkdirSync('C:/triviador/')
+        fs.writeFileSync('C:/triviador/config.json', JSON.stringify({
+        google: {
+        key: 'google_key',
+        cx: 'google_cx', 
+        },
+        ocrapi_key: 'ocrapi', 
+        img_path: 'path'
+      }, null, '\t'))
+      return setVal();
+    } else {
+    const config = require('C:/triviador/config.json')
+
+    document.getElementById('google_key').value = config.google.key 
+
+    document.getElementById('google_cx').value = config.google.cx 
+
+    document.getElementById('ocrspace_key').value = config.ocrapi_key
+
+    document.getElementById('path').value = config.img_path 
+      }
+      return;
+    }
+      </script>
+	<br><div id="wrapper", type="wrapper">
+        <button class="button button1">save</button>
+
+    </div>
+    <script>
+        'use strict';
+    // const config = require('./config.json')
+    function save() {
+        let google_key = document.getElementById('google_key').value
+        let google_cx = document.getElementById('google_cx').value;
+        let ocrapi = document.getElementById('ocrspace_key').value;
+        let patch = document.getElementById('path').value;
+        const fs = require('fs')
+        let dir = fs.readdirSync('C:/triviador/')
+       console.log(dir)
+         
+      const config = require('C:/triviador/config.json')
+     
+      fs.writeFileSync('C:/triviador/config.json', JSON.stringify({
+        google: {
+        key: google_key,
+        cx: google_cx, 
+        },
+        ocrapi_key: ocrapi, 
+        img_path: patch
+      }, null, '\t'))
+     
+    
+      return;
+
+          
+    }
+    document.getElementById('wrapper').addEventListener('click', save);
+    
+    
+        var Toast = function (element, config) {
+          var
+            _this = this,
+            _element = element,
+            _config = {
+              autohide: true,
+              delay: 5000
+            };
+          for (var prop in config) {
+            _config[prop] = config[prop];
+          }
+          Object.defineProperty(this, 'element', {
+            get: function () {
+              return _element;
+            }
+          });
+          Object.defineProperty(this, 'config', {
+            get: function () {
+              return _config;
+            }
+          });
+          _element.addEventListener('click', function (e) {
+            if (e.target.classList.contains('toast__close')) {
+              _this.hide();
+            }
+          });
+        };
+    
+        Toast.prototype = {
+          show: function () {
+            var _this = this;
+            this.element.classList.add('toast_show');
+            if (this.config.autohide) {
+              setTimeout(function () {
+                _this.hide();
+              }, this.config.delay)
+            }
+          },
+          hide: function () {
+            var event = new CustomEvent('hidden.toast', { detail: { toast: this.element } });
+            this.element.classList.remove('toast_show');
+            document.dispatchEvent(event);
+          }
+        };
+    
+        Toast.create = function (text, color) {
+          var
+            fragment = document.createDocumentFragment(),
+            toast = document.createElement('div'),
+            toastClose = document.createElement('button');
+          toast.classList.add('toast');
+          toast.style.backgroundColor = 'rgba(' + parseInt(color.substr(1, 2), 16) + ',' + parseInt(color.substr(3, 2), 16) + ',' + parseInt(color.substr(5, 2), 16) + ',1)';
+          toast.textContent = text;
+          toastClose.classList.add('toast__close');
+          toastClose.setAttribute('type', 'button');
+          toastClose.textContent = '×';
+          toast.appendChild(toastClose);
+          fragment.appendChild(toast);
+          return fragment;
+        };
+    
+        Toast.add = function (params) {
+          var config = {
+            header: 'Название заголовка',
+            text: 'Текст сообщения...',
+            color: '#ffffff',
+            autohide: true,
+            delay: 5000
+          };
+          if (params !== undefined) {
+            for (var item in params) {
+              config[item] = params[item];
+            }
+          }
+          if (!document.querySelector('.toasts')) {
+            var container = document.createElement('div');
+            container.classList.add('toasts');
+            container.style.cssText = 'position: absolute; top: 15px; right: 15px; width: 250px;color: #000;';
+            document.body.appendChild(container);
+          }
+          document.querySelector('.toasts').appendChild(Toast.create(config.text, config.color));
+          var toasts = document.querySelectorAll('.toast');
+          var toast = new Toast(toasts[toasts.length - 1], { autohide: config.autohide, delay: config.delay });
+          toast.show();
+          return toast;
+        };
+    
+        document.addEventListener('hidden.toast', function (e) {
+          var element = e.detail.toast;
+          if (element) {
+            element.parentNode.removeChild(element);
+          }
+        });
+    
+        document.querySelector('#wrapper').addEventListener('click', function () {
+         
+          Toast.add({
+            text:'saved successfully!',
+            color: '#ffffff',
+            autohide: true,
+            delay: 1500
+          });
+          window.location.href = "#top";
+        });
+
+      </script>
+</body>
+</html>

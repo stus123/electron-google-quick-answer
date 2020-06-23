@@ -1,0 +1,20 @@
+{
+  "name": "tr1v1ad0r_cheat",
+  "version": "1.0.1",
+  "description": "nigger",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  
+  "author": "pasteking1337",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^9.0.2"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "google-search": "0.0.5",
+    "ocr-space-api": "^1.0.1"
+  }
+}
