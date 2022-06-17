@@ -10,7 +10,7 @@
   "author": "pasteking1337",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^9.0.2"
+    "electron": "^15.5.5"
   },
   "dependencies": {
     "fs": "0.0.1-security",
